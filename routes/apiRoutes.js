@@ -1,13 +1,16 @@
-module.exports = function (app) {
+const router = require("express").Router(); 
+const Workouts = require('../models/models')
+
+
   //get all workouts
-  app.get("/api/workouts", (req, res) => {
-    db.workouts.find({}, (error, data) => {
-      if (error) {
-        res.status(422).json(error);
-      } else {
-        res.json(data);
-        console.log(data);
-      }
-    });
+  router.get("/api/workouts", (req, res) => {
+    Workouts.find({})
+      .then(dbWorkouts => {
+        res.json(dbWorkouts);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
   });
-};
+
+  module.exports = router

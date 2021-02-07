@@ -1,7 +1,8 @@
 const express = require("express");
-const mongojs = require("mongojs");
-const logger = require("morgan");
 const mongoose = require("mongoose");
+const logger = require("morgan");
+
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-const PORT = process.env.PORT || 3000;
+
 
 
 mongoose.connect(
@@ -23,7 +24,7 @@ mongoose.connect(
 
 //routes
 require("./routes/htmlRoutes.js")(app);
-require("./routes/apiRoutes")(app)
+app.use(require("./routes/apiRoutes"));
 
 
 app.listen(PORT, () => {
