@@ -20,8 +20,14 @@ mongoose.connect(
   { useNewUrlParser: true }
 );
 
-//code here
+
+//routes
+require("./routes/htmlRoutes.js")(app);
+require("./routes/apiRoutes")(app)
+
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });
+
+module.exports = app 
