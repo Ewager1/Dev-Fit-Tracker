@@ -13,22 +13,18 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-
-
-
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/workout",
-  { useNewUrlParser: true }
-);
-
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
 
 //routes
 require("./routes/htmlRoutes.js")(app);
 app.use(require("./routes/apiRoutes"));
 
-
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });
 
-module.exports = app 
