@@ -5,6 +5,7 @@ const Workout = require("../models/models");
 router.get("/api/workouts", (req, res) => {
   Workout.find({})
     .then((dbWorkouts) => {
+      console.log(dbWorkouts)
       res.json(dbWorkouts);
     })
     .catch((err) => {
@@ -31,8 +32,9 @@ router.put("/api/workouts/:id", (req, res) => {
     });
 });
 
+
+//Create a new workout 
 router.post("/api/workouts/", (req, res) => {
- 
 
   Workout.create(req.body)
     .then((newWorkout) => {
@@ -44,3 +46,16 @@ router.post("/api/workouts/", (req, res) => {
 });
 module.exports = router;
 
+
+
+
+//get all workouts
+router.get("/api/workouts/range", (req, res) => {
+  Workout.find({})
+    .then((dbWorkouts) => {
+      res.json(dbWorkouts);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+});
